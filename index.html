@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My API</title>
+  </head>
+  <body>
+    <script>
+      // Get the query parameters from the URL
+      const params = new URLSearchParams(window.location.search);
+      const userId = params.get('userId');
+
+      // Load the data from the JSON file
+      fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+          // Find the user with the specified ID
+          const user = data.users.find(u => u.id == userId);
+
+          // Return the user data as JSON
+          if (user) {
+            document.body.innerHTML = JSON.stringify(user);
+          } else {
+            document.body.innerHTML = 'User not found';
+          }
+        });
+    </script>
+  </body>
+</html>
